@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+        <div id="game">
+                <h1>The Psychic Game</h1>
+                <p>Guess what leter I´m thinking of</p>
+                        <p>Wins: </p>
+                        <p>Losses: </p>
+                        <p>Guesses left: </p>
+                        <p>Your guesses so far: </p>
+
+        </div>
+    
+        <script type="text/javascript">
+            //declare all variables
+                var wins = 0;
+                var losses = 0;
+                var guessL = 10;
+                var guess_SoFar = 0;
+                var abc = ["a", "b", "c", "d","e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" ];
+                var abc_user = [];
+                
+               //Get user key stroke 
+               document.onkeyup = function(event) {
+               //Assign user key stroke to variable    
+               var userGuess = event.key.toLowerCase();
+
+                    //Choose random letter from abc array
+                    var random_L = abc[Math.floor(Math.random()*abc.length)];
+
+                    //Logic 
+                    
+                    if (userGuess==random_L){
+                        wins=wins+1
+
+                    } else if(guessL>0) {
+
+                        guessL = guessL -1;
+                        abc_user[abc_user.length] = userGuess;
+
+
+                    } else { //adjust counters
+                            losses = losses + 1;
+                            guessL = 10;
+                            abc_user = [];                        
+                    }                 
+
+                    // Output
+                        var html =
+                            "<h1>The Psychic Game</h1>" +
+                            "<p>Guess what leter I´m thinking of</p>" +
+                            "<p>Wins: " + wins + "</p>" +
+                            "<p>Losses: " + losses + "</p>" +
+                            "<p>Guesses left: " + guessL + "</p>" +
+                            "<p>Your guesses so far: " + abc_user + "</p>";
+
+                        // Set the inner HTML contents of the #game div to our html string
+                        document.querySelector("#game").innerHTML = html;                  
+                
+            }           
+
+            </script>
+</body>
+</html>
